@@ -40,6 +40,10 @@ import {
     alignItems: 'center',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(0.5),
+    opacity: active ? 1 : 0.85,
+    '&:hover': {
+      opacity: 1,
+    },
   }));
   
   const StyledListButton = styled(ListItemButton)<{ active?: number }>(({ theme, active }) => ({
@@ -55,6 +59,10 @@ import {
       '&:hover': {
         backgroundColor: theme.palette.primary.dark,
       },
+    },
+    opacity: active ? 1 : 0.85,
+    '&:hover': {
+      opacity: 1,
     },
   }));
   

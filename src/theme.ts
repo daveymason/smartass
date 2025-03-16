@@ -6,7 +6,6 @@ const space1 = 8;
 const space2 = Math.round(space1 * goldenRatio); // ~13px
 const space3 = Math.round(space2 * goldenRatio); // ~21px
 const space4 = Math.round(space3 * goldenRatio); // ~34px
-const space5 = Math.round(space4 * goldenRatio); // ~55px
 
 const textXs = 0.75;
 const textSm = textXs * goldenRatio; // ~1.21rem
