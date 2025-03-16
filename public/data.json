@@ -1,0 +1,39 @@
+{
+    "urineAnalysis": {
+      "pHLevel": 6.2,
+      "Glucose": "Normal",
+      "Protein": "Trace",
+      "Leukocytes": "Negative",
+      "Nitrites": "Negative",
+      "Microalbumin": "18 mg/L",
+      "Creatinine": "1.2 mg/dL"
+    },
+    "stoolAnalysis": {
+      "Consistency": "Type 4",
+      "Blood": "Negative",
+      "Calprotectin": "50 µg/g",
+      "M2PK": "2.0 U/mL",
+      "FatContent": "Normal",
+      "Elastase": "420 µg/g",
+      "Parasites": "None detected"
+    },
+    "physicalMarkers": {
+      "HeartRate": "72 bpm",
+      "Temperature": "98.6°F",
+      "Weight": "180 lbs",
+      "BodyFat": "24%",
+      "Hydration": "Adequate",
+      "SitToStand": "5.2 sec",
+      "Balance": "Stable"
+    },
+    "aiInsights": {
+      "summary": "Your health indicators are generally within normal ranges.",
+      "recommendations": [
+        "Increase dietary fiber (25-30g daily)",
+        "Add anti-inflammatory foods (berries, fatty fish, olive oil)",
+        "Stay hydrated (min. 2L water daily)",
+        "Consider moderate exercise (150 min/week)",
+        "Monitor protein levels at next check"
+      ]
+    }
+  }
