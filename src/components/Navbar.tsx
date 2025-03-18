@@ -7,11 +7,13 @@ import {
   Avatar,
   Menu,
   MenuItem,
-  Tooltip
+  Tooltip,
+  Typography
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { styled } from '@mui/material/styles';
 import { navbarIconButtonStyles } from '../theme';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const RightSection = styled(Box)({
   display: 'flex',
@@ -19,7 +21,12 @@ const RightSection = styled(Box)({
   gap: 12, 
 });
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  patientId: string;
+  onLogout: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ patientId, onLogout }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [settingsAnchorEl, setSettingsAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -36,10 +43,17 @@ const Navbar: React.FC = () => {
     setSettingsAnchorEl(null);
   };
 
+  const handleSignOut = () => {
+    handleMenuClose();
+    onLogout();
+  };
+
   return (
     <AppBar position="fixed"> 
       <Toolbar>
-        <Box sx={{ width: 40 }} />
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          .
+        </Typography>
         
         <RightSection>
           <Tooltip title="Settings">
@@ -98,9 +112,24 @@ const Navbar: React.FC = () => {
         open={Boolean(anchorEl)}
         onClose={handleMenuClose}
       >
+        <Box sx={{ 
+          px: 2, 
+          py: 1, 
+          borderBottom: '1px solid #eaeaea', 
+          backgroundColor: '#f5f8ff',
+          mb: 1
+        }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 'bold' }}>
+            Patient ID: {patientId}
+          </Typography>
+        </Box>
+        
         <MenuItem onClick={handleMenuClose}>My Profile</MenuItem>
         <MenuItem onClick={handleMenuClose}>Account Settings</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Sign Out</MenuItem>
+        <MenuItem onClick={handleSignOut}>
+          <LogoutIcon fontSize="small" sx={{ mr: 1 }} />
+          Sign Out
+        </MenuItem>
       </Menu>
     </AppBar>
   );

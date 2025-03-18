@@ -3,15 +3,15 @@ import { createTheme } from '@mui/material/styles';
 const goldenRatio = 1.618;
 
 const space1 = 8;
-const space2 = Math.round(space1 * goldenRatio); // ~13px
-const space3 = Math.round(space2 * goldenRatio); // ~21px
-const space4 = Math.round(space3 * goldenRatio); // ~34px
+const space2 = Math.round(space1 * goldenRatio); 
+const space3 = Math.round(space2 * goldenRatio); 
+const space4 = Math.round(space3 * goldenRatio); 
 
 const textXs = 0.75;
-const textSm = textXs * goldenRatio; // ~1.21rem
+const textSm = textXs * goldenRatio; 
 const textBase = 1;
-const textMd = textBase * goldenRatio; // ~1.62rem
-const textLg = textMd * goldenRatio; // ~2.62rem
+const textMd = textBase * goldenRatio; 
+const textLg = textMd * goldenRatio; 
 
 const mainContentStyles = {
   paddingTop: 10, 
@@ -21,7 +21,7 @@ const mainContentStyles = {
 const navbarIconButtonStyles = {
   color: '#ffffff',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)', // Slightly better hover effect
+    backgroundColor: 'rgba(255, 255, 255, 0.15)', 
   },
 };
 

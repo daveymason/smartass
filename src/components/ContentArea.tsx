@@ -4,10 +4,11 @@ import { mainContentStyles } from '../theme';
 
 interface ContentAreaProps {
   page: string;
+  patientId?: string;
 }
 
-function ContentArea({ page }: ContentAreaProps) {
-  return ( 
+function ContentArea({ page, patientId }: ContentAreaProps & { patientId: string }) {
+    return ( 
     <Box 
     component="main" 
     sx={mainContentStyles}
@@ -15,7 +16,7 @@ function ContentArea({ page }: ContentAreaProps) {
     aria-label={`${page} content`}
   >
   
-      {page === 'dashboard' && <HealthSummary />}
+      {page === 'dashboard' && <HealthSummary patientId={patientId} />}
       {page === 'export' && <h1>Export Page</h1>}
       {page !== 'dashboard' && page !== 'export' && <div>Select a menu item</div>}
     </Box>

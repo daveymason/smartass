@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { 
   Grid, Typography, Box, 
-  Card, CardHeader, CardContent 
+  Card, CardHeader, CardContent, CircularProgress
 } from '@mui/material';
+
 import { styled } from '@mui/material/styles';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import SpaIcon from '@mui/icons-material/Spa';
@@ -42,6 +43,10 @@ interface HealthData {
     summary: string;
     recommendations: string[];
   };
+}
+
+interface HealthSummaryProps {
+  patientId: string;
 }
 
 const InsightCard = styled(Card)(() => ({
@@ -108,7 +113,7 @@ const AiRecommendation = styled(Box)(({ theme }) => ({
   borderRadius: `0 ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0`,
 }));
 
-function HealthSummary() {
+function HealthSummary({ patientId }: HealthSummaryProps) {
   const [healthData, setHealthData] = useState<HealthData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -116,7 +121,7 @@ function HealthSummary() {
   useEffect(() => {
     const fetchHealthData = async () => {
       try {
-        const response = await fetch('/data.json');
+        const response = await fetch(`/api/formatted-observations/${patientId}/`);
         if (!response.ok) {
           throw new Error('Failed to fetch health data');
         }
@@ -132,10 +137,41 @@ function HealthSummary() {
     };
 
     fetchHealthData();
-  }, []);
+  }, [patientId]);
 
   if (loading) {
-    return <Typography>Loading health data...</Typography>;
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '70vh',
+          padding: 4,
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: 'white',
+            borderRadius: 2,
+            padding: 4,
+            boxShadow: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 3,
+            maxWidth: 400,
+            width: '100%',
+          }}
+        >
+          <CircularProgress size={60} thickness={4} />
+          <Typography variant="h6" color="primary">
+            Loading Health Data
+          </Typography>
+        </Box>
+      </Box>
+    );
   }
 
   if (error || !healthData) {
@@ -144,9 +180,11 @@ function HealthSummary() {
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Typography variant="h4" gutterBottom>
-        Health Summary
-      </Typography>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h4">
+          Health Summary - Patient ID: {patientId}
+        </Typography>
+      </Box>
 
       <Grid container spacing={2}>
         <Grid item xs={12} md={6} lg={3}>
