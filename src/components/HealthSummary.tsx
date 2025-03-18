@@ -121,8 +121,12 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   useEffect(() => {
     const fetchHealthData = async () => {
       try {
-        const response = await fetch(`/api/formatted-observations/${patientId}/`);
-        if (!response.ok) {
+        const isProduction = window.location.hostname !== 'localhost';
+        const baseUrl = isProduction 
+          ? 'https://smarttoilet.jordanesposito.dev' 
+          : '';
+        
+        const response = await fetch(`${baseUrl}/api/formatted-observations/${patientId}/`);        if (!response.ok) {
           throw new Error('Failed to fetch health data');
         }
         const data = await response.json();
