@@ -81,11 +81,10 @@ const Navbar: React.FC<NavbarProps> = ({ patientId, onLogout }) => {
             >
               <Avatar 
                 alt="User Profile" 
-                src="/user-avatar.png" 
                 sx={{ 
-                  width: 32, 
-                  height: 32,
-                  border: '2px solid #ffffff' 
+                  width: 40, 
+                  height: 40,
+                  border: '2px solid #ffffff',
                 }}
               />
             </IconButton>
