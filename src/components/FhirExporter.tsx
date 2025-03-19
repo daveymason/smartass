@@ -16,33 +16,45 @@ interface FhirBundle {
     [key: string]: any;
   }
 
+  // Helper function for Base64 encoding without using btoa directly
+function encodeBase64(str: string) {
+  const utf8Bytes = new TextEncoder().encode(str);
+  
+  let binaryStr = '';
+  utf8Bytes.forEach(byte => {
+    binaryStr += String.fromCharCode(byte);
+  });
+  
+  return btoa(binaryStr); //I give up. 
+}
+
 export function useFhirExporter(healthData: HealthData | null, patientId: string) {
   const getLOINCCode = (key: string): string => {
     const loincMap: Record<string, string> = {
-      pHLevel: "2753-2",
-      Glucose: "2345-7",
-      Protein: "2888-6",
-      Leukocytes: "5821-4",
-      Nitrites: "32710-6",
-      Microalbumin: "14957-5",
-      Creatinine: "2160-0",
-      Consistency: "33463-0",
-      Blood: "5778-6", 
-      Calprotectin: "53373-4",
-      M2PK: "58453-2", 
-      FatContent: "15238-9",
-      Elastase: "13690-3",
-      Parasites: "6399-9",
-      HeartRate: "8867-4",
-      Temperature: "8310-5",
-      Weight: "29463-7",
-      BodyFat: "41982-0",
-      Hydration: "24359-4", 
-      SitToStand: "89204-2",
-      Balance: "62356-1"
+      pHLevel: "5803-2",         //https://loinc.org/5803-2
+      Glucose: "5792-7",         //https://loinc.org/5792-7
+      Protein: "20454-5",        //https://loinc.org/20454-5
+      Leukocytes: "5799-2",      //https://loinc.org/5799-2
+      Nitrites: "2657-5",        //https://loinc.org/2657-5
+      Microalbumin: "14957-5",   //https://loinc.org/14957-5
+      Creatinine: "12190-5",     //https://loinc.org/12190-5 
+      Consistency: "11029-6",    //https://loinc.org/11029-6
+      Blood: "2335-8",           //https://loinc.org/2335-8
+      Calprotectin: "38445-3",   //https://loinc.org/38445-3
+      M2PK: "100654-3",          //https://loinc.org/100654-3  
+      FatContent: "2270-7",      //https://loinc.org/2270-7 
+      Elastase: "25907-7",       //https://loinc.org/25907-7
+      Parasites: "10701-1",      //https://loinc.org/10701-1
+      HeartRate: "8867-4",       //https://loinc.org/8867-4
+      Temperature: "8310-5",     //https://loinc.org/8310-5
+      Weight: "29463-7",         //https://loinc.org/29463-7
+      BodyFat: "41982-0",        //https://loinc.org/41982-0
+      Hydration: "81676-9",      //https://loinc.org/81676-9
+      SitToStand: "LP125096-0",  //https://loinc.org/LP125096-0
+      Balance: "46654-0"         //https://loinc.org/62356-1
     };
     
-    return loincMap[key] || "74728-7"; // Default to "Undetermined" code
+    return loincMap[key] || "Lonic Code Cannot Be Found"; 
   };
 
   const convertToFHIR = useCallback((data: HealthData, id: string) => {
@@ -156,7 +168,7 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
           content: [{
             attachment: {
               contentType: "text/plain",
-              data: btoa(data.aiInsights.summary || "")
+              data: encodeBase64(data.aiInsights.summary || "")
             }
           }]
         }
@@ -183,7 +195,7 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
             content: [{
               attachment: {
                 contentType: "text/plain",
-                data: btoa(data.aiInsights.recommendations.join("\n"))
+                data: encodeBase64(data.aiInsights.recommendations.join("\n"))
               }
             }]
           }
