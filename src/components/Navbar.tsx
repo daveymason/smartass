@@ -10,7 +10,6 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { styled } from '@mui/material/styles';
 import { navbarIconButtonStyles } from '../theme';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -28,19 +27,13 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ patientId, onLogout }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [settingsAnchorEl, setSettingsAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSettingsMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setSettingsAnchorEl(event.currentTarget);
-  };
-
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setSettingsAnchorEl(null);
   };
 
   const handleSignOut = () => {
@@ -56,18 +49,6 @@ const Navbar: React.FC<NavbarProps> = ({ patientId, onLogout }) => {
         </Typography>
         
         <RightSection>
-          <Tooltip title="Settings">
-            <IconButton 
-              size="large"
-              onClick={handleSettingsMenuOpen}
-              aria-controls="settings-menu"
-              aria-haspopup="true"
-              aria-label="Open settings menu"
-              sx={navbarIconButtonStyles} 
-            >
-              <SettingsIcon />
-            </IconButton>
-          </Tooltip>
           
           <Tooltip title="Profile">
             <IconButton
@@ -91,18 +72,6 @@ const Navbar: React.FC<NavbarProps> = ({ patientId, onLogout }) => {
           </Tooltip>
         </RightSection>
       </Toolbar>
-      
-      <Menu
-        id="settings-menu"
-        anchorEl={settingsAnchorEl}
-        keepMounted
-        open={Boolean(settingsAnchorEl)}
-        onClose={handleMenuClose}
-      >
-        <MenuItem onClick={handleMenuClose}>App Settings</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Notification Preferences</MenuItem>
-        <MenuItem onClick={handleMenuClose}>Privacy Controls</MenuItem>
-      </Menu>
 
       <Menu
         id="profile-menu"

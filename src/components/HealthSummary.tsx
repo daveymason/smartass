@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   Grid, Typography, Box, 
-  Card, CardHeader, CardContent, CircularProgress
+  Card, CardHeader, CardContent, CircularProgress, Button,  Menu, MenuItem
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
@@ -9,6 +9,9 @@ import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import SpaIcon from '@mui/icons-material/Spa';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import { usePDF } from 'react-to-pdf';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 // This should match the json structure I think
 interface HealthData {
@@ -117,6 +120,42 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   const [healthData, setHealthData] = useState<HealthData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  
+  const { toPDF, targetRef } = usePDF({
+    filename: `health_data_${patientId}_${new Date().toISOString().split('T')[0]}.pdf`,
+    page: { margin: 20 }
+  });
+  
+  const handleExportClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  
+  const handleExportClose = () => {
+    setAnchorEl(null);
+  };
+  
+  const handleExportJSON = () => {
+    if (!healthData) return;
+    
+    const dataStr = JSON.stringify(healthData, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    const exportFileName = `health_data_${patientId}_${new Date().toISOString().split('T')[0]}.json`;
+    
+    const downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href', dataUri);
+    downloadLink.setAttribute('download', exportFileName);
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    
+    handleExportClose();
+  };
+  
+  const handleExportPDF = () => {
+    toPDF();
+    handleExportClose();
+  };
 
   useEffect(() => {
     const fetchHealthData = async () => {
@@ -183,11 +222,42 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   }
 
   return (
-    <Box sx={{ padding: 2 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+    <Box ref={targetRef} sx={{ padding: 2 }}>
+<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">
           Health Summary - Patient ID: {patientId}
         </Typography>
+        
+        <div>
+          <Button 
+            variant="outlined" 
+            color="primary" 
+            startIcon={<GetAppIcon />}
+            endIcon={<KeyboardArrowDownIcon />}
+            onClick={handleExportClick}
+            aria-controls="export-menu"
+            aria-haspopup="true"
+          >
+            Export
+          </Button>
+          <Menu
+            id="export-menu"
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleExportClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+          >
+            <MenuItem onClick={handleExportJSON}>Export as JSON</MenuItem>
+            <MenuItem onClick={handleExportPDF}>Export as PDF</MenuItem>
+          </Menu>
+        </div>
       </Box>
 
       <Grid container spacing={2}>

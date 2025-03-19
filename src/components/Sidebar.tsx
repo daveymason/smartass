@@ -11,7 +11,7 @@ import {
   } from '@mui/material';
   import DashboardIcon from '@mui/icons-material/Dashboard';
   import BarChartIcon from '@mui/icons-material/BarChart';
-  import FileDownloadIcon from '@mui/icons-material/FileDownload';
+  import SettingsIcon from '@mui/icons-material/Settings';
   import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
   import logo from '../assets/logo.png';
 
@@ -89,7 +89,7 @@ import {
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
     { id: 'analytics', label: 'Analytics', icon: <BarChartIcon /> },
-    { id: 'export', label: 'Export', icon: <FileDownloadIcon /> },
+    { id: 'settings', label: 'Settings', icon: <SettingsIcon /> },
     { id: 'help', label: 'Help', icon: <HelpOutlineIcon /> },
   ];
   
