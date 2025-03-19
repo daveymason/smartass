@@ -12,41 +12,9 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { usePDF } from 'react-to-pdf';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { HealthData } from '../types/healthData';
+import { useFhirExporter } from './FhirExporter'; 
 
-// This should match the json structure I think
-interface HealthData {
-  urineAnalysis: {
-    pHLevel: number;
-    Glucose: string;
-    Protein: string;
-    Leukocytes: string;
-    Nitrites: string;
-    Microalbumin: string;
-    Creatinine: string;
-  };
-  stoolAnalysis: {
-    Consistency: string;
-    Blood: string;
-    Calprotectin: string;
-    M2PK: string;
-    FatContent: string;
-    Elastase: string;
-    Parasites: string;
-  };
-  physicalMarkers: {
-    HeartRate: string;
-    Temperature: string;
-    Weight: string;
-    BodyFat: string;
-    Hydration: string;
-    SitToStand: string;
-    Balance: string;
-  };
-  aiInsights: {
-    summary: string;
-    recommendations: string[];
-  };
-}
 
 interface HealthSummaryProps {
   patientId: string;
@@ -126,6 +94,8 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
     filename: `health_data_${patientId}_${new Date().toISOString().split('T')[0]}.pdf`,
     page: { margin: 20 }
   });
+
+  const { exportFHIR } = useFhirExporter(healthData, patientId); 
   
   const handleExportClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -154,6 +124,11 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   
   const handleExportPDF = () => {
     toPDF();
+    handleExportClose();
+  };
+  
+  const handleExportFHIR = () => {
+    exportFHIR();
     handleExportClose();
   };
 
@@ -210,7 +185,7 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
         >
           <CircularProgress size={60} thickness={4} />
           <Typography variant="h6" color="primary">
-            Loading Health Data
+            Loading ...
           </Typography>
         </Box>
       </Box>
@@ -223,7 +198,7 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
 
   return (
     <Box ref={targetRef} sx={{ padding: 2 }}>
-<Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography variant="h4">
           Health Summary - Patient ID: {patientId}
         </Typography>
@@ -256,6 +231,7 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
           >
             <MenuItem onClick={handleExportJSON}>Export as JSON</MenuItem>
             <MenuItem onClick={handleExportPDF}>Export as PDF</MenuItem>
+            <MenuItem onClick={handleExportFHIR}>Export as FHIR</MenuItem>
           </Menu>
         </div>
       </Box>
