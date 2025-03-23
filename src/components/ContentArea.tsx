@@ -1,4 +1,5 @@
 import HealthSummary from './HealthSummary';
+import AdvUrineAnalysis from './AdvUrineAnalysis';
 import { Box } from '@mui/material';
 import { mainContentStyles } from '../theme';
 
@@ -17,9 +18,10 @@ function ContentArea({ page, patientId }: ContentAreaProps & { patientId: string
   >
   
       {page === 'dashboard' && <HealthSummary patientId={patientId} />}
-      {page === 'export' && <h1>Export Page</h1>}
-      {page !== 'dashboard' && page !== 'export' && <div>Select a menu item</div>}
-    </Box>
+      {page === 'adv-urine-analysis' && <AdvUrineAnalysis isOpen={true} onClose={() => {}} />}
+      {page !== 'dashboard' && page !== 'adv-urine-analysis' && page !== 'export' && 
+        <div>Select a menu item</div>}
+  </Box>
   );
 }
 

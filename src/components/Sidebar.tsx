@@ -88,7 +88,8 @@ import {
   
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
-    { id: 'analytics', label: 'Analytics', icon: <BarChartIcon /> },
+    { id: 'adv-urine-analysis', label: 'Urine Analysis', icon: <BarChartIcon /> },
+
     { id: 'settings', label: 'Settings', icon: <SettingsIcon /> },
     { id: 'help', label: 'Help', icon: <HelpOutlineIcon /> },
   ];

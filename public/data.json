@@ -1,39 +1,166 @@
 {
-    "urineAnalysis": {
-      "pHLevel": 6.2,
-      "Glucose": "Normal",
-      "Protein": "Trace",
-      "Leukocytes": "Negative",
-      "Nitrites": "Negative",
-      "Microalbumin": "18 mg/L",
-      "Creatinine": "1.2 mg/dL"
-    },
-    "stoolAnalysis": {
-      "Consistency": "Type 4",
-      "Blood": "Negative",
-      "Calprotectin": "50 µg/g",
-      "M2PK": "2.0 U/mL",
-      "FatContent": "Normal",
-      "Elastase": "420 µg/g",
-      "Parasites": "None detected"
-    },
-    "physicalMarkers": {
-      "HeartRate": "72 bpm",
-      "Temperature": "98.6°F",
-      "Weight": "180 lbs",
-      "BodyFat": "24%",
-      "Hydration": "Adequate",
-      "SitToStand": "5.2 sec",
-      "Balance": "Stable"
-    },
-    "aiInsights": {
-      "summary": "Your health indicators are generally within normal ranges.",
-      "recommendations": [
-        "Increase dietary fiber (25-30g daily)",
-        "Add anti-inflammatory foods (berries, fatty fish, olive oil)",
-        "Stay hydrated (min. 2L water daily)",
-        "Consider moderate exercise (150 min/week)",
-        "Monitor protein levels at next check"
+  "urineAnalysis": {
+    "pHLevel": 6.2,
+    "Glucose": "Normal",
+    "Protein": "Trace",
+    "Leukocytes": "Negative",
+    "Nitrites": "Negative",
+    "Microalbumin": "18 mg/L",
+    "Creatinine": "1.2 mg/dL",
+    "detailedMetrics": {
+      "primary": [
+        {
+          "metric": "pH Level",
+          "value": 6.2,
+          "unit": null,
+          "notes": "Normal range around 4.5 to 8",
+          "status": "normal"
+        },
+        {
+          "metric": "Glucose",
+          "value": 1.0,
+          "unit": "mg/dL",
+          "notes": "Generally considered normal",
+          "status": "normal"
+        },
+        {
+          "metric": "Protein",
+          "value": 0.2,
+          "unit": "mg/dL",
+          "notes": "Normal range, elevated levels indicate kidney problems",
+          "status": "normal"
+        },
+        {
+          "metric": "Leukocytes",
+          "value": 1,
+          "unit": "#/hpf",
+          "notes": "Elevated levels indicate infection",
+          "status": "normal"
+        },
+        {
+          "metric": "Nitrites",
+          "value": 0,
+          "unit": "mg/mL",
+          "notes": "Normal, nitrites indicate bacterial infection",
+          "status": "normal"
+        },
+        {
+          "metric": "Microalbumin",
+          "value": 8.3,
+          "unit": "mg/L",
+          "notes": "Normal range, elevated levels indicate kidney damage",
+          "status": "normal"
+        },
+        {
+          "metric": "Creatinine",
+          "value": 1,
+          "unit": "mg/dL",
+          "notes": "Normal range, assesses kidney function",
+          "status": "normal"
+        }
+      ],
+      "secondary": [
+        {
+          "metric": "Ketones",
+          "value": "Negative",
+          "unit": null,
+          "notes": "Indicates fat breakdown, relevant for diabetes and dietary conditions",
+          "status": "normal"
+        },
+        {
+          "metric": "Urea",
+          "value": 24,
+          "unit": "mg/dL",
+          "notes": "Assesses kidney function",
+          "status": "normal"
+        },
+        {
+          "metric": "Sodium",
+          "value": 140,
+          "unit": "mmol/L",
+          "notes": "Part of electrolyte balance, important for hydration",
+          "status": "normal"
+        },
+        {
+          "metric": "Potassium",
+          "value": 4.2,
+          "unit": "mmol/L",
+          "notes": "Part of electrolyte balance, important for cardiac function",
+          "status": "normal"
+        },
+        {
+          "metric": "Chloride",
+          "value": 104,
+          "unit": "mmol/L",
+          "notes": "Part of electrolyte balance, reflects hydration status",
+          "status": "normal"
+        }
+      ],
+      "advanced": [
+        {
+          "metric": "Volatile Organic Compounds (VOCs)",
+          "value": "Within range",
+          "unit": null,
+          "notes": "Potential biomarkers for kidney disease, diabetes, and certain cancers",
+          "status": "normal"
+        },
+        {
+          "metric": "8-OHdG (Oxidative Stress)",
+          "value": 2.3,
+          "unit": "ng/mL",
+          "notes": "Indicates oxidative damage, relevant for chronic diseases",
+          "status": "normal"
+        },
+        {
+          "metric": "MCP-1 (Inflammatory)",
+          "value": 220,
+          "unit": "pg/mL",
+          "notes": "Indicates inflammation, important for conditions like lupus nephritis",
+          "status": "normal"
+        },
+        {
+          "metric": "Cortisol",
+          "value": 15,
+          "unit": "μg/dL",
+          "notes": "Indicates endocrine disorders and related conditions",
+          "status": "normal"
+        },
+        {
+          "metric": "PCA3 (Cancer Biomarker)",
+          "value": "Negative",
+          "unit": null,
+          "notes": "Early detection of urinary tract and other cancers",
+          "status": "normal"
+        }
       ]
     }
+  },
+  "stoolAnalysis": {
+    "Consistency": "Type 4",
+    "Blood": "Negative",
+    "Calprotectin": "50 µg/g",
+    "M2PK": "2.0 U/mL",
+    "FatContent": "Normal",
+    "Elastase": "420 µg/g",
+    "Parasites": "None detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "72 bpm",
+    "Temperature": "98.6°F",
+    "Weight": "180 lbs",
+    "BodyFat": "24%",
+    "Hydration": "Adequate",
+    "SitToStand": "5.2 sec",
+    "Balance": "Stable"
+  },
+  "aiInsights": {
+    "summary": "Your health indicators are generally within normal ranges.",
+    "recommendations": [
+      "Increase dietary fiber (25-30g daily)",
+      "Add anti-inflammatory foods (berries, fatty fish, olive oil)",
+      "Stay hydrated (min. 2L water daily)",
+      "Consider moderate exercise (150 min/week)",
+      "Monitor protein levels at next check"
+    ]
   }
+}

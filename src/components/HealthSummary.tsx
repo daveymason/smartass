@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { 
   Grid, Typography, Box, 
-  Card, CardHeader, CardContent, CircularProgress, Button,  Menu, MenuItem
+  Card, CardHeader, CardContent, CircularProgress, Button,  Menu, MenuItem,
 } from '@mui/material';
 
 import { styled } from '@mui/material/styles';
@@ -12,8 +12,11 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import { usePDF } from 'react-to-pdf';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { HealthData } from '../types/healthData';
 import { useFhirExporter } from './FhirExporter'; 
+import AdvUrineAnalysis from './AdvUrineAnalysis';
+
 
 
 interface HealthSummaryProps {
@@ -89,6 +92,10 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [showUrineDetails, setShowUrineDetails] = useState(false);
+  
+  const urineDetailsRef = useRef<HTMLDivElement>(null);
+    
   
   const { toPDF, targetRef } = usePDF({
     filename: `health_data_${patientId}_${new Date().toISOString().split('T')[0]}.pdf`,
@@ -130,6 +137,17 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
   const handleExportFHIR = () => {
     exportFHIR();
     handleExportClose();
+  };
+
+  const handleToggleUrineDetails = () => {
+    const newValue = !showUrineDetails;
+    setShowUrineDetails(newValue);
+    
+    if (newValue && urineDetailsRef.current) {
+      setTimeout(() => {
+        urineDetailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   };
 
   useEffect(() => {
@@ -240,41 +258,55 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
         <Grid item xs={12} md={6} lg={3}>
           <InsightCard>
             <CustomCardHeader 
-              title="Urine Analysis"
+              title="Urine Analysis" 
               id="urine-analysis-title"
+              bgColor="linear-gradient(135deg, #64b5f6, #1976d2)"
             />
-            <CardIconWrapper>
+            <CardIconWrapper color="#1976d2">
               <WaterDropIcon fontSize="large" />
             </CardIconWrapper>
             <CardContent>
               <DataRow>
-                <DataLabel>pH Level:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.pHLevel}</DataValue>
+                <DataLabel variant="body2">pH Level</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.pHLevel}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Glucose:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Glucose}</DataValue>
+                <DataLabel variant="body2">Glucose</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Glucose}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Protein:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Protein}</DataValue>
+                <DataLabel variant="body2">Protein</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Protein}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Leukocytes:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Leukocytes}</DataValue>
+                <DataLabel variant="body2">Leukocytes</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Leukocytes}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Nitrites:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Nitrites}</DataValue>
+                <DataLabel variant="body2">Nitrites</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Nitrites}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Microalbumin:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Microalbumin}</DataValue>
+                <DataLabel variant="body2">Microalbumin</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Microalbumin}</DataValue>
               </DataRow>
               <DataRow>
-                <DataLabel>Creatinine:</DataLabel>
-                <DataValue>{healthData.urineAnalysis.Creatinine}</DataValue>
+                <DataLabel variant="body2">Creatinine</DataLabel>
+                <DataValue variant="body2">{healthData.urineAnalysis.Creatinine}</DataValue>
               </DataRow>
+              {/* View Details Button */}
+              {healthData.urineAnalysis.detailedMetrics && (
+                <Box sx={{ mt: 2, textAlign: 'center' }}>
+                  <Button 
+                    size="small" 
+                    onClick={handleToggleUrineDetails}
+                    endIcon={showUrineDetails ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                    color="primary"
+                  >
+                    {showUrineDetails ? 'Hide Details' : 'View Details'}
+                  </Button>
+                </Box>
+              )}
             </CardContent>
           </InsightCard>
         </Grid>
@@ -392,6 +424,18 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
           </InsightCard>
         </Grid>
       </Grid>
+
+            {/* Reference div for scrolling */}
+            <div ref={urineDetailsRef}></div>
+      
+      {/* Use the Advanced Urine Analysis Component */}
+      {healthData?.urineAnalysis?.detailedMetrics && (
+        <AdvUrineAnalysis 
+          detailedMetrics={healthData.urineAnalysis.detailedMetrics}
+          isOpen={showUrineDetails}
+          onClose={handleToggleUrineDetails}
+        />
+      )}
     </Box>
   );
 }
