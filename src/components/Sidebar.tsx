@@ -10,9 +10,9 @@ import {
     styled
   } from '@mui/material';
   import DashboardIcon from '@mui/icons-material/Dashboard';
-  import BarChartIcon from '@mui/icons-material/BarChart';
   import SettingsIcon from '@mui/icons-material/Settings';
   import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+  import PsychologyIcon from '@mui/icons-material/Psychology';
   import logo from '../assets/logo.png';
 
   interface SidebarProps {
@@ -88,7 +88,7 @@ import {
   
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
-    { id: 'analytics', label: 'Analytics', icon: <BarChartIcon /> },
+    { id: 'ai-insights', label: 'AI Insights', icon: <PsychologyIcon /> },
     { id: 'settings', label: 'Settings', icon: <SettingsIcon /> },
     { id: 'help', label: 'Help', icon: <HelpOutlineIcon /> },
   ];
