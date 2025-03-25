@@ -51,7 +51,8 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
       BodyFat: "41982-0",        //https://loinc.org/41982-0
       Hydration: "81676-9",      //https://loinc.org/81676-9
       SitToStand: "LP125096-0",  //https://loinc.org/LP125096-0
-      Balance: "46654-0"         //https://loinc.org/62356-1
+      Balance: "46654-0",        //https://loinc.org/62356-1
+      Ketones: "2514-8",         //https://loinc.org/2514-8
     };
     
     return loincMap[key] || "Lonic Code Cannot Be Found"; 
