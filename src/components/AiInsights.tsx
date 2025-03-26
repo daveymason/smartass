@@ -189,7 +189,7 @@ const AiInsights: React.FC = () => {
   }
   
   return (
-    <Box sx={{ p: 3, maxWidth: 900, mx: 'auto' }}>
+    <Box sx={{ p: 3 }}>  
       <Typography variant="h4" component="h1" gutterBottom fontWeight="600">
         Your AI Health Insights
       </Typography>
@@ -201,80 +201,91 @@ const AiInsights: React.FC = () => {
       
       <Divider sx={{ my: 3 }} />
       
-      <StyledCard>
-        <StyledCardHeader
-          avatar={<ScienceIcon />}
-          title="Medical Recommendations"
-          bgcolor="#3a8ffe"
-        />
-        <CardContent>
-          <List sx={{ p: 0 }}>
-            {medicalRecommendations.map((recommendation, index) => (
-              <RecommendationItem key={index} borderColor="#3a8ffe">
-                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={recommendation}
-                    primaryTypographyProps={{ fontWeight: 500 }}
-                  />
-                </ListItem>
-              </RecommendationItem>
-            ))}
-          </List>
-        </CardContent>
-      </StyledCard>
-      
-      <StyledCard>
-        <StyledCardHeader
-          avatar={<BarChartIcon />}
-          title="Nutrition Recommendations"
-          bgcolor="#4caf50"
-        />
-        <CardContent>
-          <List sx={{ p: 0 }}>
-            {nutritionRecommendations.map((recommendation, index) => (
-              <RecommendationItem key={index} borderColor="#4caf50">
-                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={recommendation}
-                    primaryTypographyProps={{ fontWeight: 500 }}
-                  />
-                </ListItem>
-              </RecommendationItem>
-            ))}
-          </List>
-        </CardContent>
-      </StyledCard>
-      
-      <StyledCard>
-        <StyledCardHeader
-          avatar={<AssessmentIcon />}
-          title="Fitness Recommendations"
-          bgcolor="#ff9800"
-        />
-        <CardContent>
-          <List sx={{ p: 0 }}>
-            {fitnessRecommendations.map((recommendation, index) => (
-              <RecommendationItem key={index} borderColor="#ff9800">
-                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon fontSize="small" sx={{ color: '#ff9800' }} />
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={recommendation}
-                    primaryTypographyProps={{ fontWeight: 500 }}
-                  />
-                </ListItem>
-              </RecommendationItem>
-            ))}
-          </List>
-        </CardContent>
-      </StyledCard>
+      <Box 
+        sx={{ 
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',                    
+            md: 'repeat(3, 1fr)'          
+          },
+          gap: 3
+        }}
+      >
+        <StyledCard sx={{ height: '100%' }}>  
+          <StyledCardHeader
+            avatar={<ScienceIcon />}
+            title="Medical Recommendations"
+            bgcolor="#3a8ffe"
+          />
+          <CardContent>
+            <List sx={{ p: 0 }}>
+              {medicalRecommendations.map((recommendation, index) => (
+                <RecommendationItem key={index} borderColor="#3a8ffe">
+                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                    <ListItemIcon sx={{ minWidth: 36 }}>
+                      <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={recommendation}
+                      primaryTypographyProps={{ fontWeight: 500 }}
+                    />
+                  </ListItem>
+                </RecommendationItem>
+              ))}
+            </List>
+          </CardContent>
+        </StyledCard>
+        
+        <StyledCard sx={{ height: '100%' }}>
+          <StyledCardHeader
+            avatar={<BarChartIcon />}
+            title="Nutrition Recommendations"
+            bgcolor="#4caf50"
+          />
+          <CardContent>
+            <List sx={{ p: 0 }}>
+              {nutritionRecommendations.map((recommendation, index) => (
+                <RecommendationItem key={index} borderColor="#4caf50">
+                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                    <ListItemIcon sx={{ minWidth: 36 }}>
+                      <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={recommendation}
+                      primaryTypographyProps={{ fontWeight: 500 }}
+                    />
+                  </ListItem>
+                </RecommendationItem>
+              ))}
+            </List>
+          </CardContent>
+        </StyledCard>
+        
+        <StyledCard sx={{ height: '100%' }}>
+          <StyledCardHeader
+            avatar={<AssessmentIcon />}
+            title="Fitness Recommendations"
+            bgcolor="#ff9800"
+          />
+          <CardContent>
+            <List sx={{ p: 0 }}>
+              {fitnessRecommendations.map((recommendation, index) => (
+                <RecommendationItem key={index} borderColor="#ff9800">
+                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                    <ListItemIcon sx={{ minWidth: 36 }}>
+                      <CheckCircleIcon fontSize="small" sx={{ color: '#ff9800' }} />
+                    </ListItemIcon>
+                    <ListItemText 
+                      primary={recommendation}
+                      primaryTypographyProps={{ fontWeight: 500 }}
+                    />
+                  </ListItem>
+                </RecommendationItem>
+              ))}
+            </List>
+          </CardContent>
+        </StyledCard>
+      </Box>
       
       <Box sx={{ mt: 4, textAlign: 'center' }}>
         <GradientButton 
