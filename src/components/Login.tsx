@@ -9,16 +9,16 @@ interface LoginProps {
 }
 
 const patients = [
-  { id: '46591294', name: 'Patient 1 (Unhealthy)', condition: 'unhealthy' },
-  { id: '46591419', name: 'Patient 2 (Unhealthy)', condition: 'unhealthy' },
-  { id: '46591581', name: 'Patient 3 (Unhealthy)', condition: 'unhealthy' },
-  { id: '46591802', name: 'Patient 4 (Healthy)', condition: 'healthy' },
-  { id: '46592018', name: 'Patient 5 (Healthy)', condition: 'healthy' },
-  { id: '46592352', name: 'Patient 6 (Healthy)', condition: 'healthy' },
-  { id: '46591894', name: 'Patient 7 (Healthy)', condition: 'healthy' },
-  { id: '46592240', name: 'Patient 8 (Healthy)', condition: 'healthy' },
-  { id: '46592408', name: 'Patient 9 (Healthy)', condition: 'healthy' },
-  { id: '46592652', name: 'Patient 10 (Healthy)', condition: 'healthy' },
+  { id: '527252', name: 'Patient 1 (Unhealthy)', condition: 'unhealthy' },
+  { id: '527314', name: 'Patient 2 (Unhealthy)', condition: 'unhealthy' },
+  { id: '527358', name: 'Patient 3 (Unhealthy)', condition: 'unhealthy' },
+  { id: '527415', name: 'Patient 4 (Healthy)', condition: 'healthy' },
+  { id: '527473', name: 'Patient 5 (Healthy)', condition: 'healthy' },
+  { id: '527511', name: 'Patient 6 (Healthy)', condition: 'healthy' },
+  { id: '527550', name: 'Patient 7 (Healthy)', condition: 'healthy' },
+  { id: '527568', name: 'Patient 8 (Healthy)', condition: 'healthy' },
+  { id: '527606', name: 'Patient 9 (Healthy)', condition: 'healthy' },
+  { id: '527641', name: 'Patient 10 (Healthy)', condition: 'healthy' },
 ];
 
 function Login({ onLogin }: LoginProps) {
