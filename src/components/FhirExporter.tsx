@@ -65,7 +65,6 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
       entry: []
     };
     
-    // patient resource
     bundle.entry.push({
       resource: {
         resourceType: "Patient",
@@ -77,7 +76,6 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
       }
     });
     
-    // Urine data to Observation resources
     if (data.urineAnalysis) {
       Object.entries(data.urineAnalysis).forEach(([key, value]) => {
         bundle.entry.push({
@@ -101,7 +99,6 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
       });
     }
     
-    // stool conversion to Observation resources
     if (data.stoolAnalysis) {
       Object.entries(data.stoolAnalysis).forEach(([key, value]) => {
         bundle.entry.push({
@@ -125,7 +122,6 @@ export function useFhirExporter(healthData: HealthData | null, patientId: string
       });
     }
     
-    //Observation resources for physical markers
     if (data.physicalMarkers) {
       Object.entries(data.physicalMarkers).forEach(([key, value]) => {
         bundle.entry.push({
