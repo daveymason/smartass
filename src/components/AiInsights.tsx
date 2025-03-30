@@ -12,7 +12,11 @@ import {
   ListItemIcon,
   ListItemText,
   CircularProgress,
-  Alert
+  Alert,
+  FormControlLabel,
+  Checkbox,
+  FormHelperText,
+  FormGroup
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -70,15 +74,30 @@ const GradientButton = styled(Button)(({ theme }) => ({
 const AiInsights: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
-  
+  const [consentGiven, setConsentGiven] = useState(false);
+  const [consentError, setConsentError] = useState(false);
+
   const generateInsights = () => {
+    if (!consentGiven) {
+      setConsentError(true);
+      return;
+    }
+
+    setConsentError(false);
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       setGenerated(true);
     }, 2500);
   };
-  
+
+  const handleConsentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setConsentGiven(event.target.checked);
+    if (event.target.checked) {
+      setConsentError(false);
+    }
+  };
+
   const medicalRecommendations = [
     "Schedule a follow-up appointment in 3 months",
     "Consider additional screening for kidney function",
@@ -86,7 +105,7 @@ const AiInsights: React.FC = () => {
     "Discuss vitamin D supplementation with your physician",
     "Review medication regimen at next visit"
   ];
-  
+
   const nutritionRecommendations = [
     "Increase daily fiber intake to 25-30g",
     "Reduce sodium consumption to under 2000mg per day",
@@ -94,7 +113,7 @@ const AiInsights: React.FC = () => {
     "Consider plant-based protein alternatives",
     "Stay hydrated with at least 2L of water daily"
   ];
-  
+
   const fitnessRecommendations = [
     "Aim for 150 minutes of moderate aerobic activity weekly",
     "Incorporate strength training 2-3 times per week",
@@ -102,26 +121,26 @@ const AiInsights: React.FC = () => {
     "Consider balance exercises to improve stability",
     "Start with short walks and gradually increase duration"
   ];
-  
+
   if (!generated) {
     return (
       <Box sx={{ p: 3, maxWidth: 800, mx: 'auto' }}>
         <Typography variant="h4" component="h1" gutterBottom fontWeight="600">
           AI Health Insights
         </Typography>
-        
+
         <Typography variant="body1" paragraph>
           Our AI can analyze your health data to provide personalized recommendations
           across medical, dietary, and fitness domains.
         </Typography>
-        
+
         <Alert severity="info" sx={{ mb: 3 }}>
           <Typography variant="body2">
             AI insights are generated based on your health data and should be used as general guidance only.
             Always consult with healthcare professionals before making significant changes to your health regimen.
           </Typography>
         </Alert>
-        
+
         <StyledCard>
           <StyledCardHeader
             avatar={<PsychologyIcon />}
@@ -154,7 +173,7 @@ const AiInsights: React.FC = () => {
             </List>
           </CardContent>
         </StyledCard>
-        
+
         {loading ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4 }}>
             <CircularProgress />
@@ -164,13 +183,46 @@ const AiInsights: React.FC = () => {
           </Box>
         ) : (
           <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <GradientButton 
-              variant="contained" 
+            <Box
+              sx={{
+                mb: 2,
+                p: 2,
+                border: consentError ? '1px solid #d32f2f' : '1px solid #e0e0e0',
+                borderRadius: 1,
+                backgroundColor: 'rgba(0,0,0,0.02)'
+              }}
+            >
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={consentGiven}
+                      onChange={handleConsentChange}
+                      color="primary"
+                    />
+                  }
+                  label={
+                    <Typography variant="body2">
+                      I consent to my health data being processed by the AI system to generate personalized insights.
+                      I understand this data is used only for this purpose and in accordance with the privacy policy.
+                    </Typography>
+                  }
+                />
+                {consentError && (
+                  <FormHelperText error sx={{ ml: 2 }}>
+                    You must provide consent before generating AI insights.
+                  </FormHelperText>
+                )}
+              </FormGroup>
+            </Box>
+
+            <GradientButton
+              variant="contained"
               disableElevation
               startIcon={<InsightsIcon />}
               onClick={generateInsights}
               size="large"
-              sx={{ 
+              sx={{
                 backgroundSize: '300% 300%',
                 animation: 'gradient 3s ease infinite',
                 '@keyframes gradient': {
@@ -187,31 +239,31 @@ const AiInsights: React.FC = () => {
       </Box>
     );
   }
-  
+
   return (
-    <Box sx={{ p: 3 }}>  
+    <Box sx={{ p: 3 }}>
       <Typography variant="h4" component="h1" gutterBottom fontWeight="600">
         Your AI Health Insights
       </Typography>
-      
+
       <Typography variant="body1" paragraph>
         Based on your health data, our AI has generated the following personalized recommendations.
         Review these insights with your healthcare provider.
       </Typography>
-      
+
       <Divider sx={{ my: 3 }} />
-      
-      <Box 
-        sx={{ 
+
+      <Box
+        sx={{
           display: 'grid',
           gridTemplateColumns: {
-            xs: '1fr',                    
-            md: 'repeat(3, 1fr)'          
+            xs: '1fr',
+            md: 'repeat(3, 1fr)'
           },
           gap: 3
         }}
       >
-        <StyledCard sx={{ height: '100%' }}>  
+        <StyledCard sx={{ height: '100%' }}>
           <StyledCardHeader
             avatar={<ScienceIcon />}
             title="Medical Recommendations"
@@ -225,7 +277,7 @@ const AiInsights: React.FC = () => {
                     <ListItemIcon sx={{ minWidth: 36 }}>
                       <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary={recommendation}
                       primaryTypographyProps={{ fontWeight: 500 }}
                     />
@@ -235,7 +287,7 @@ const AiInsights: React.FC = () => {
             </List>
           </CardContent>
         </StyledCard>
-        
+
         <StyledCard sx={{ height: '100%' }}>
           <StyledCardHeader
             avatar={<BarChartIcon />}
@@ -250,7 +302,7 @@ const AiInsights: React.FC = () => {
                     <ListItemIcon sx={{ minWidth: 36 }}>
                       <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary={recommendation}
                       primaryTypographyProps={{ fontWeight: 500 }}
                     />
@@ -260,7 +312,7 @@ const AiInsights: React.FC = () => {
             </List>
           </CardContent>
         </StyledCard>
-        
+
         <StyledCard sx={{ height: '100%' }}>
           <StyledCardHeader
             avatar={<AssessmentIcon />}
@@ -275,7 +327,7 @@ const AiInsights: React.FC = () => {
                     <ListItemIcon sx={{ minWidth: 36 }}>
                       <CheckCircleIcon fontSize="small" sx={{ color: '#ff9800' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary={recommendation}
                       primaryTypographyProps={{ fontWeight: 500 }}
                     />
@@ -286,14 +338,14 @@ const AiInsights: React.FC = () => {
           </CardContent>
         </StyledCard>
       </Box>
-      
+
       <Box sx={{ mt: 4, textAlign: 'center' }}>
-        <GradientButton 
-          variant="contained" 
+        <GradientButton
+          variant="contained"
           disableElevation
           startIcon={<TrackChangesIcon />}
           onClick={() => setGenerated(false)}
-          sx={{ 
+          sx={{
             backgroundSize: '300% 300%',
             animation: 'gradient 3s ease infinite',
             '@keyframes gradient': {
