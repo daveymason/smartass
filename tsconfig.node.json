@@ -5,15 +5,16 @@
     "lib": ["ES2023"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
+    "composite": true,
+    "jsx": "react-jsx",
+    
+    "outDir": "./dist",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
 
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
