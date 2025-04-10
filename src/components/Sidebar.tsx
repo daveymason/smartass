@@ -10,10 +10,10 @@ import {
     styled
   } from '@mui/material';
   import DashboardIcon from '@mui/icons-material/Dashboard';
-  import SettingsIcon from '@mui/icons-material/Settings';
   import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
   import PsychologyIcon from '@mui/icons-material/Psychology';
   import logo from '../assets/logo.png';
+  import { useLanguage } from '../i18n/LanguageContext';
 
   interface SidebarProps {
     onMenuClick: (page: string) => void;
@@ -34,19 +34,19 @@ import {
     },
   }));
   
-  const StyledListItem = styled(ListItem)<{ active?: number }>(({ theme, active }) => ({
+  const StyledListItem = styled(ListItem)<{ isActive?: boolean }>(({ theme, isActive }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(0.5),
-    opacity: active ? 1 : 0.85,
+    opacity: isActive ? 1 : 0.85,
     '&:hover': {
       opacity: 1,
     },
   }));
   
-  const StyledListButton = styled(ListItemButton)<{ active?: number }>(({ theme, active }) => ({
+  const StyledListButton = styled(ListItemButton)<{ isActive?: boolean }>(({ theme, isActive }) => ({
     borderRadius: '50%',
     minWidth: 50,
     height: 50,
@@ -60,24 +60,24 @@ import {
         backgroundColor: theme.palette.primary.dark,
       },
     },
-    opacity: active ? 1 : 0.85,
+    opacity: isActive ? 1 : 0.85,
     '&:hover': {
       opacity: 1,
     },
   }));
   
-  const IconContainer = styled(ListItemIcon)<{ active?: number }>(({ theme, active }) => ({
+  const IconContainer = styled(ListItemIcon)<{ isActive?: boolean }>(({ theme, isActive }) => ({
     minWidth: 'auto',
-    color: active ? 'inherit' : theme.palette.text.primary,
+    color: isActive ? 'inherit' : theme.palette.text.primary,
     display: 'flex',
     justifyContent: 'center',
   }));
   
-  const IconLabel = styled(Typography)<{ active?: number }>(({ theme, active }) => ({
+  const IconLabel = styled(Typography)<{ isActive?: boolean }>(({ theme, isActive }) => ({
     fontSize: '0.7rem',
     textAlign: 'center',
-    color: active ? theme.palette.primary.main : theme.palette.text.secondary,
-    fontWeight: active ? 600 : 400,
+    color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
+    fontWeight: isActive ? 600 : 400,
     marginTop: theme.spacing(0.5),
     lineHeight: 1.2,
     maxWidth: 70,
@@ -86,14 +86,15 @@ import {
     textOverflow: 'ellipsis',
   }));
   
-  const navItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: <DashboardIcon /> },
-    { id: 'ai-insights', label: 'AI Insights', icon: <PsychologyIcon /> },
-    { id: 'settings', label: 'Settings', icon: <SettingsIcon /> },
-    { id: 'help', label: 'Help', icon: <HelpOutlineIcon /> },
-  ];
-  
   const Sidebar: React.FC<SidebarProps> = ({ onMenuClick, activePage }) => {
+    const { t } = useLanguage();
+    
+    const navItems = [
+      { id: 'dashboard', label: t('sidebar.dashboard'), icon: <DashboardIcon /> },
+      { id: 'ai-insights', label: t('sidebar.aiInsights'), icon: <PsychologyIcon /> },
+      { id: 'help', label: t('sidebar.help'), icon: <HelpOutlineIcon /> },
+    ];
+    
     return (
       <SidebarContainer variant="permanent">
         <Box 
@@ -116,27 +117,28 @@ import {
           />
         </Box>
         <Divider sx={{ width: '100%' }} />
-
-        
         
         <List sx={{ width: '100%' }}>
-          {navItems.map((item) => (
-            <StyledListItem key={item.id} disablePadding active={activePage === item.id ? 1 : 0}>
-              <StyledListButton 
-                selected={activePage === item.id}
-                onClick={() => onMenuClick(item.id)}
-                active={activePage === item.id ? 1 : 0}
-                aria-current={activePage === item.id ? "page" : undefined}
-              >
-                <IconContainer active={activePage === item.id ? 1 : 0}>
-                  {item.icon}
-                </IconContainer>
-              </StyledListButton>
-              <IconLabel active={activePage === item.id ? 1 : 0}>
-                {item.label}
-              </IconLabel>
-            </StyledListItem>
-          ))}
+          {navItems.map((item) => {
+            const isActive = activePage === item.id;
+            return (
+              <StyledListItem key={item.id} disablePadding isActive={isActive}>
+                <StyledListButton 
+                  selected={isActive}
+                  onClick={() => onMenuClick(item.id)}
+                  isActive={isActive}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <IconContainer isActive={isActive}>
+                    {item.icon}
+                  </IconContainer>
+                </StyledListButton>
+                <IconLabel isActive={isActive}>
+                  {item.label}
+                </IconLabel>
+              </StyledListItem>
+            );
+          })}
         </List>
       </SidebarContainer>
     );

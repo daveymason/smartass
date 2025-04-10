@@ -3,9 +3,6 @@ import {
   Box,
   Typography,
   Button,
-  Card,
-  CardContent,
-  CardHeader,
   Divider,
   List,
   ListItem,
@@ -29,36 +26,9 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ScienceIcon from '@mui/icons-material/Science';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
-import { aiRecommendationStyles } from '../theme';
-
-const StyledCard = styled(Card)(({ theme }) => ({
-  marginBottom: theme.spacing(3),
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[2],
-  overflow: 'hidden',
-}));
-
-const StyledCardHeader = styled(CardHeader)<{ bgcolor?: string }>(({ theme, bgcolor }) => ({
-  backgroundColor: bgcolor || theme.palette.primary.main,
-  color: theme.palette.common.white,
-  padding: theme.spacing(2),
-  '& .MuiCardHeader-title': {
-    fontWeight: 600,
-    fontSize: '1.1rem',
-  },
-  '& .MuiCardHeader-avatar': {
-    marginRight: theme.spacing(1.5),
-  },
-}));
-
-const RecommendationItem = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'borderColor',
-})<{ borderColor?: string }>(({ theme, borderColor }) => ({
-  ...aiRecommendationStyles,
-  borderLeftColor: borderColor || theme.palette.primary.main,
-  marginBottom: theme.spacing(2),
-  borderRadius: `0 ${theme.shape.borderRadius}px ${theme.shape.borderRadius}px 0`,
-}));
+import { useLanguage } from '../i18n/LanguageContext';
+import StyledCard from './ui/StyledCard';
+import RecommendationItem from './ui/RecommendationItem';
 
 const GradientButton = styled(Button)(({ theme }) => ({
   backgroundImage: 'linear-gradient(135deg, #3a8ffe, #0052cc, #0Baacc, #825EF5)',
@@ -72,6 +42,7 @@ const GradientButton = styled(Button)(({ theme }) => ({
 }));
 
 const AiInsights: React.FC = () => {
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [generated, setGenerated] = useState(false);
   const [consentGiven, setConsentGiven] = useState(false);
@@ -126,59 +97,54 @@ const AiInsights: React.FC = () => {
     return (
       <Box sx={{ p: 3, maxWidth: 800, mx: 'auto' }}>
         <Typography variant="h4" component="h1" gutterBottom fontWeight="600">
-          AI Health Insights
+          {t('aiInsights.title')}
         </Typography>
 
         <Typography variant="body1" paragraph>
-          Our AI can analyze your health data to provide personalized recommendations
-          across medical, dietary, and fitness domains.
+          {t('aiInsights.description')}
         </Typography>
 
         <Alert severity="info" sx={{ mb: 3 }}>
           <Typography variant="body2">
-            AI insights are generated based on your health data and should be used as general guidance only.
-            Always consult with healthcare professionals before making significant changes to your health regimen.
+            {t('aiInsights.disclaimer')}
           </Typography>
         </Alert>
 
-        <StyledCard>
-          <StyledCardHeader
-            avatar={<PsychologyIcon />}
-            title="What to Expect"
-            bgcolor="#3a8ffe"
-          />
-          <CardContent>
-            <Typography variant="body2" color="text.secondary" paragraph>
-              By clicking "Generate Insights", our AI will analyze:
-            </Typography>
-            <List dense>
-              <ListItem sx={{ px: 0 }}>
-                <ListItemIcon>
-                  <MedicalServicesIcon fontSize="small" color="primary" />
-                </ListItemIcon>
-                <ListItemText primary="Medical recommendations based on your test results" />
-              </ListItem>
-              <ListItem sx={{ px: 0 }}>
-                <ListItemIcon>
-                  <LocalDiningIcon fontSize="small" sx={{ color: '#4caf50' }} />
-                </ListItemIcon>
-                <ListItemText primary="Dietary suggestions to improve health markers" />
-              </ListItem>
-              <ListItem sx={{ px: 0 }}>
-                <ListItemIcon>
-                  <FitnessCenterIcon fontSize="small" sx={{ color: '#ff9800' }} />
-                </ListItemIcon>
-                <ListItemText primary="Exercise and lifestyle recommendations" />
-              </ListItem>
-            </List>
-          </CardContent>
+        <StyledCard
+          title={t('aiInsights.whatToExpect')}
+          icon={<PsychologyIcon />}
+          headerColor="#3a8ffe"
+        >
+          <Typography variant="body2" color="text.secondary" paragraph>
+            {t('aiInsights.byClicking')}
+          </Typography>
+          <List dense>
+            <ListItem sx={{ px: 0 }}>
+              <ListItemIcon>
+                <MedicalServicesIcon fontSize="small" color="primary" />
+              </ListItemIcon>
+              <ListItemText primary={t('aiInsights.medicalRecommendations')} />
+            </ListItem>
+            <ListItem sx={{ px: 0 }}>
+              <ListItemIcon>
+                <LocalDiningIcon fontSize="small" sx={{ color: '#4caf50' }} />
+              </ListItemIcon>
+              <ListItemText primary={t('aiInsights.dietarySuggestions')} />
+            </ListItem>
+            <ListItem sx={{ px: 0 }}>
+              <ListItemIcon>
+                <FitnessCenterIcon fontSize="small" sx={{ color: '#ff9800' }} />
+              </ListItemIcon>
+              <ListItemText primary={t('aiInsights.exerciseRecommendations')} />
+            </ListItem>
+          </List>
         </StyledCard>
 
         {loading ? (
           <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2, mt: 4 }}>
             <CircularProgress />
             <Typography variant="body2" color="text.secondary">
-              Analyzing your health data and generating personalized insights...
+              {t('aiInsights.analyzing')}
             </Typography>
           </Box>
         ) : (
@@ -203,14 +169,13 @@ const AiInsights: React.FC = () => {
                   }
                   label={
                     <Typography variant="body2">
-                      I consent to my health data being processed by the AI system to generate personalized insights.
-                      I understand this data is used only for this purpose and in accordance with the privacy policy.
+                      {t('aiInsights.consentLabel')}
                     </Typography>
                   }
                 />
                 {consentError && (
                   <FormHelperText error sx={{ ml: 2 }}>
-                    You must provide consent before generating AI insights.
+                    {t('aiInsights.consentError')}
                   </FormHelperText>
                 )}
               </FormGroup>
@@ -232,7 +197,7 @@ const AiInsights: React.FC = () => {
                 }
               }}
             >
-              Generate AI Insights
+              {t('aiInsights.generateButton')}
             </GradientButton>
           </Box>
         )}
@@ -243,12 +208,11 @@ const AiInsights: React.FC = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" component="h1" gutterBottom fontWeight="600">
-        Your AI Health Insights
+        {t('aiInsights.resultTitle')}
       </Typography>
 
       <Typography variant="body1" paragraph>
-        Based on your health data, our AI has generated the following personalized recommendations.
-        Review these insights with your healthcare provider.
+        {t('aiInsights.resultDescription')}
       </Typography>
 
       <Divider sx={{ my: 3 }} />
@@ -263,79 +227,76 @@ const AiInsights: React.FC = () => {
           gap: 3
         }}
       >
-        <StyledCard sx={{ height: '100%' }}>
-          <StyledCardHeader
-            avatar={<ScienceIcon />}
-            title="Medical Recommendations"
-            bgcolor="#3a8ffe"
-          />
-          <CardContent>
-            <List sx={{ p: 0 }}>
-              {medicalRecommendations.map((recommendation, index) => (
-                <RecommendationItem key={index} borderColor="#3a8ffe">
-                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
-                      <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={recommendation}
-                      primaryTypographyProps={{ fontWeight: 500 }}
-                    />
-                  </ListItem>
-                </RecommendationItem>
-              ))}
-            </List>
-          </CardContent>
+        <StyledCard
+          title={t('aiInsights.medicalTitle')}
+          icon={<ScienceIcon />}
+          iconColor="#3a8ffe"
+          headerColor="#3a8ffe"
+          sx={{ height: '100%' }}
+        >
+          <List sx={{ p: 0 }}>
+            {medicalRecommendations.map((recommendation, index) => (
+              <RecommendationItem key={index} borderColor="#3a8ffe">
+                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                  <ListItemIcon sx={{ minWidth: 36 }}>
+                    <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={recommendation}
+                    primaryTypographyProps={{ fontWeight: 500 }}
+                  />
+                </ListItem>
+              </RecommendationItem>
+            ))}
+          </List>
         </StyledCard>
 
-        <StyledCard sx={{ height: '100%' }}>
-          <StyledCardHeader
-            avatar={<BarChartIcon />}
-            title="Nutrition Recommendations"
-            bgcolor="#4caf50"
-          />
-          <CardContent>
-            <List sx={{ p: 0 }}>
-              {nutritionRecommendations.map((recommendation, index) => (
-                <RecommendationItem key={index} borderColor="#4caf50">
-                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
-                      <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={recommendation}
-                      primaryTypographyProps={{ fontWeight: 500 }}
-                    />
-                  </ListItem>
-                </RecommendationItem>
-              ))}
-            </List>
-          </CardContent>
+        <StyledCard
+          title={t('aiInsights.nutritionTitle')}
+          icon={<BarChartIcon />}
+          iconColor="#4caf50"
+          headerColor="#4caf50"
+          sx={{ height: '100%' }}
+        >
+          <List sx={{ p: 0 }}>
+            {nutritionRecommendations.map((recommendation, index) => (
+              <RecommendationItem key={index} borderColor="#4caf50">
+                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                  <ListItemIcon sx={{ minWidth: 36 }}>
+                    <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={recommendation}
+                    primaryTypographyProps={{ fontWeight: 500 }}
+                  />
+                </ListItem>
+              </RecommendationItem>
+            ))}
+          </List>
         </StyledCard>
 
-        <StyledCard sx={{ height: '100%' }}>
-          <StyledCardHeader
-            avatar={<AssessmentIcon />}
-            title="Fitness Recommendations"
-            bgcolor="#ff9800"
-          />
-          <CardContent>
-            <List sx={{ p: 0 }}>
-              {fitnessRecommendations.map((recommendation, index) => (
-                <RecommendationItem key={index} borderColor="#ff9800">
-                  <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                    <ListItemIcon sx={{ minWidth: 36 }}>
-                      <CheckCircleIcon fontSize="small" sx={{ color: '#ff9800' }} />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={recommendation}
-                      primaryTypographyProps={{ fontWeight: 500 }}
-                    />
-                  </ListItem>
-                </RecommendationItem>
-              ))}
-            </List>
-          </CardContent>
+        <StyledCard
+          title={t('aiInsights.fitnessTitle')}
+          icon={<AssessmentIcon />}
+          iconColor="#ff9800"
+          headerColor="#ff9800" 
+          sx={{ height: '100%' }}
+        >
+          <List sx={{ p: 0 }}>
+            {fitnessRecommendations.map((recommendation, index) => (
+              <RecommendationItem key={index} borderColor="#ff9800">
+                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                  <ListItemIcon sx={{ minWidth: 36 }}>
+                    <CheckCircleIcon fontSize="small" sx={{ color: '#ff9800' }} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primary={recommendation}
+                    primaryTypographyProps={{ fontWeight: 500 }}
+                  />
+                </ListItem>
+              </RecommendationItem>
+            ))}
+          </List>
         </StyledCard>
       </Box>
 
@@ -355,7 +316,7 @@ const AiInsights: React.FC = () => {
             }
           }}
         >
-          Reset & Generate New Insights
+          {t('aiInsights.resetButton')}
         </GradientButton>
       </Box>
     </Box>
