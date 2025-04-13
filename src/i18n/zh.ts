@@ -62,6 +62,29 @@ export default {
     nutritionTitle: '营养建议',
     fitnessTitle: '健身建议',
     resetButton: '重置并生成新的洞察',
+    recommendations: {
+      medical: [
+        "安排三个月后的随访预约",
+        "考虑进行额外的肾功能筛查",
+        "每周两次监测血压",
+        "与医生讨论维生素D补充",
+        "在下次就诊时复查用药方案"
+      ],
+      nutrition: [
+        "增加每日膳食纤维摄入量至25-30克",
+        "减少钠摄入量至每天低于2000毫克",
+        "每周两次添加富含omega-3的食物，如脂肪鱼",
+        "考虑植物性蛋白质替代品",
+        "每天保持至少2升水的摄入量"
+      ],
+      fitness: [
+        "每周进行150分钟的中等强度有氧运动",
+        "每周进行2-3次力量训练",
+        "添加灵活性锻炼，如瑜伽或拉伸",
+        "考虑平衡练习以提高稳定性",
+        "从短距离步行开始，逐渐增加时间"
+      ]
+    }
   },
   login: {
     title: '智能厕所登录',
@@ -76,5 +99,30 @@ export default {
     dashboard: '仪表板',
     aiInsights: 'AI洞察',
     help: '帮助',
+  },
+  help: {
+    title: '帮助和文档',
+    welcome: '欢迎使用智能厕所健康监测系统。本指南将帮助您浏览应用程序的功能。',
+    gettingStarted: '开始使用',
+    loginProcess: '登录',
+    selectPatient: '在登录屏幕上从下拉菜单中选择一位患者。',
+    clickLogin: '点击"登录"按钮访问系统。',
+    redirected: '您将被重定向到健康摘要仪表板。',
+    healthSummaryTitle: '健康摘要',
+    healthSummaryDesc: '健康摘要仪表板显示您的综合健康数据，包括尿液分析、粪便分析、身体指标和AI生成的见解。',
+    exportDesc: '使用右上角的导出按钮以不同格式下载您的健康数据。',
+    goToHealthSummary: '前往健康摘要',
+    aiInsightsTitle: 'AI洞察',
+    aiInsightsDesc: 'AI洞察页面根据您的数据提供个性化的健康建议，包括医疗、营养和健身建议。',
+    consentDesc: '在AI分析您的健康数据之前，您必须提供同意。这确保您的隐私得到尊重。',
+    goToAiInsights: '前往AI洞察',
+    additionalFeatures: '额外功能',
+    languageSettings: '语言设置',
+    languageDesc: '通过点击右上角的个人资料图标并选择"设置"来更改应用程序语言。',
+    exportFeature: '数据导出选项',
+    exportTypes: '您可以以JSON格式导出健康数据以实现数据可移植性，以PDF格式用于打印，或以FHIR格式用于医疗系统集成。',
+    fhirExport: 'FHIR（快速医疗保健互操作性资源）格式允许您的数据与医疗保健提供者和电子健康记录系统共享。',
+    needMoreHelp: '需要更多帮助？',
+    contactSupport: '如果您需要其他帮助，请联系我们的支持团队：',
   },
 };

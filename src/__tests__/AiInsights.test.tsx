@@ -87,14 +87,10 @@ describe('AiInsights Component', () => {
             </ThemeProvider>
         );
         
-        // Generate error by clicking button without consent
         fireEvent.click(screen.getByRole('button', { name: /generate ai insights/i }));
         expect(screen.getByText(/you must provide consent/i)).toBeInTheDocument();
         
-        // Give consent
         fireEvent.click(screen.getByRole('checkbox'));
-        
-        // Error message should disappear
         expect(screen.queryByText(/you must provide consent/i)).not.toBeInTheDocument();
     });
 });

@@ -23,6 +23,5 @@ Navigate to http://localhost:5173 to view the app.
 ⚛️ React - UI library  
 📦 Vite - Fast build tool and dev server  
 🎨 Material UI - Component library with theming  
-📊 Some sort of charts - Data visualization  (Soon)
 🧠 AI Integration - Smart health analytics
 ```

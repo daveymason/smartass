@@ -3,6 +3,7 @@ import {
   Box, Button, Typography, Paper,
   FormControl, InputLabel, Select, MenuItem
 } from '@mui/material';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface LoginProps {
   onLogin: (patientId: string) => void;
@@ -23,6 +24,21 @@ const patients = [
 
 function Login({ onLogin }: LoginProps) {
   const [selectedPatient, setSelectedPatient] = useState('');
+  let t;
+  try {
+    const { t: translate } = useLanguage();
+    t = translate;
+  } catch (error) {
+    // Fallback for dev for context fallback
+    t = (key: string) => {
+      const fallbacks: { [key: string]: string } = {
+        'login.title': 'Smart Toilet Login',
+        'login.selectPatient': 'Select Patient',
+        'login.loginButton': 'Login'
+      };
+      return fallbacks[key] || key;
+    };
+  }
 
   const handleLogin = () => {
     if (selectedPatient) {
@@ -49,15 +65,15 @@ function Login({ onLogin }: LoginProps) {
         }}
       >
         <Typography variant="h4" component="h1" gutterBottom align="center">
-          Smart Toilet Login
+          {t('login.title')}
         </Typography>
         
         <FormControl fullWidth margin="normal">
-          <InputLabel id="patient-select-label">Select Patient</InputLabel>
+          <InputLabel id="patient-select-label">{t('login.selectPatient')}</InputLabel>
           <Select
             labelId="patient-select-label"
             value={selectedPatient}
-            label="Select Patient"
+            label={t('login.selectPatient')}
             onChange={(e) => setSelectedPatient(e.target.value)}
           >
             {patients.map((patient) => (
@@ -79,7 +95,7 @@ function Login({ onLogin }: LoginProps) {
           disabled={!selectedPatient}
           sx={{ mt: 3 }}
         >
-          Login
+          {t('login.loginButton')}
         </Button>
       </Paper>
     </Box>

@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import ContentArea from './ContentArea';
 import Login from './Login';
 import { Box } from '@mui/material';
+import { LanguageProvider } from '../i18n/LanguageContext';
 
 function Layout() {
   const [activePage, setActivePage] = useState<string>('dashboard');
@@ -21,16 +22,28 @@ function Layout() {
     setAuthenticatedPatient(null);
   };
 
+  // Render login outside of the Box with navbar and sidebar to mimic real auth
   if (!authenticatedPatient) {
-    return <Login onLogin={handleLogin} />;
+    // Login still needs language context tho
+    return (
+      <LanguageProvider>
+        <Login onLogin={handleLogin} />
+      </LanguageProvider>
+    );
   }
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <Navbar patientId={authenticatedPatient} onLogout={handleLogout} />
-      <Sidebar onMenuClick={handleMenuClick} activePage={activePage} />
-      <ContentArea page={activePage} patientId={authenticatedPatient} />
-    </Box>
+    <LanguageProvider>
+      <Box sx={{ display: 'flex' }}>
+        <Navbar patientId={authenticatedPatient} onLogout={handleLogout} />
+        <Sidebar onMenuClick={handleMenuClick} activePage={activePage} />
+        <ContentArea 
+          page={activePage} 
+          patientId={authenticatedPatient} 
+          onNavigate={handleMenuClick} 
+        />
+      </Box>
+    </LanguageProvider>
   );
 }
 

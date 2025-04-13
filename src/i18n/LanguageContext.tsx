@@ -7,7 +7,7 @@ type Language = 'english' | 'chinese';
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => string;
+  t: (key: string, options?: { returnObjects?: boolean }) => any;
 }
 
 const languages = {
@@ -15,13 +15,16 @@ const languages = {
   chinese: zh,
 };
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const defaultContextValue: LanguageContextType = {
+  language: 'english',
+  setLanguage: () => {},
+  t: (key: string) => key,
+};
+
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 export const useLanguage = (): LanguageContextType => {
   const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
   return context;
 };
 
@@ -30,16 +33,28 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved === 'english' || saved === 'chinese') ? saved : 'english';
-  });
+  const [language, setLanguage] = useState<Language>('english');
 
   useEffect(() => {
-    localStorage.setItem('language', language);
+    try {
+      const saved = localStorage.getItem('language');
+      if (saved === 'english' || saved === 'chinese') {
+        setLanguage(saved);
+      }
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('language', language);
+    } catch (error) {
+      console.error('Error accessing localStorage:', error);
+    }
   }, [language]);
 
-  const t = (key: string): string => {
+  const t = (key: string, options?: { returnObjects?: boolean }): any => {
     const keys = key.split('.');
     let value: any = languages[language];
     
@@ -47,16 +62,19 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       if (value && value[k]) {
         value = value[k];
       } else {
-        value = getFromEnglish(key);
+        value = getFromEnglish(key, options);
         break;
       }
+    }
+    
+    if (options?.returnObjects && typeof value === 'object') {
+      return value;
     }
     
     return typeof value === 'string' ? value : key;
   };
 
-  // Helper function to get English fallback, if no others are foudn
-  const getFromEnglish = (key: string): string => {
+  const getFromEnglish = (key: string, options?: { returnObjects?: boolean }): any => {
     const keys = key.split('.');
     let value: any = languages.english;
     
@@ -66,6 +84,10 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
       } else {
         return key;
       }
+    }
+    
+    if (options?.returnObjects && typeof value === 'object') {
+      return value;
     }
     
     return typeof value === 'string' ? value : key;

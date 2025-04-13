@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import { useFhirExporter } from '../components/FhirExporter';
 import { HealthData } from '../types/healthData';
 
-// Store the original createElement to avoid recursion errors
 const originalCreateElement = document.createElement;
 
 document.createElement = jest.fn().mockImplementation((tag) => {
@@ -15,14 +14,12 @@ document.createElement = jest.fn().mockImplementation((tag) => {
       remove: jest.fn(),
     };
   }
-  // Use original implementation to avoid recursion errors
   return originalCreateElement.call(document, tag);
 });
 
 document.body.appendChild = jest.fn();
 document.body.removeChild = jest.fn();
 
-// Create a proper React wrapper component for hooks because renderHook was causing issues
 const Wrapper = ({ children }: { children: React.ReactNode }) => React.createElement(React.Fragment, null, children);
 
 describe('FhirExporter Hook', () => {

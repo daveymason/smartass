@@ -11,8 +11,6 @@ describe('Layout Component', () => {
         <Layout />
       </ThemeProvider>
     );
-    
-    // Check for login component
-    expect(screen.getByText('Smart Toilet Login')).toBeInTheDocument();
+        expect(screen.getByText('Smart Toilet Login')).toBeInTheDocument();
   });
 });

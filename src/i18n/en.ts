@@ -62,6 +62,29 @@ export default {
     nutritionTitle: 'Nutrition Recommendations',
     fitnessTitle: 'Fitness Recommendations',
     resetButton: 'Reset & Generate New Insights',
+    recommendations: {
+      medical: [
+        "Schedule a follow-up appointment in 3 months",
+        "Consider additional screening for kidney function",
+        "Monitor blood pressure twice weekly",
+        "Discuss vitamin D supplementation with your physician",
+        "Review medication regimen at next visit"
+      ],
+      nutrition: [
+        "Increase daily fiber intake to 25-30g",
+        "Reduce sodium consumption to under 2000mg per day",
+        "Add omega-3 rich foods like fatty fish twice weekly",
+        "Consider plant-based protein alternatives",
+        "Stay hydrated with at least 2L of water daily"
+      ],
+      fitness: [
+        "Aim for 150 minutes of moderate aerobic activity weekly",
+        "Incorporate strength training 2-3 times per week",
+        "Add flexibility exercises like yoga or stretching",
+        "Consider balance exercises to improve stability",
+        "Start with short walks and gradually increase duration"
+      ]
+    }
   },
   login: {
     title: 'Smart Toilet Login',
@@ -76,5 +99,30 @@ export default {
     dashboard: 'Dashboard',
     aiInsights: 'AI Insights',
     help: 'Help',
+  },
+  help: {
+    title: 'Help & Documentation',
+    welcome: 'Welcome to the Smart Toilet Health Monitoring System. This guide will help you navigate through the features and functionality of the application.',
+    gettingStarted: 'Getting Started',
+    loginProcess: 'Logging In',
+    selectPatient: 'Select a patient from the dropdown menu on the login screen.',
+    clickLogin: 'Click on the "Login" button to access the system.',
+    redirected: 'You will be redirected to the Health Summary dashboard.',
+    healthSummaryTitle: 'Health Summary',
+    healthSummaryDesc: 'The Health Summary dashboard displays your comprehensive health data including urine analysis, stool analysis, physical markers, and AI-generated insights.',
+    exportDesc: 'Use the Export button in the top-right corner to download your health data in different formats.',
+    goToHealthSummary: 'Go to Health Summary',
+    aiInsightsTitle: 'AI Insights',
+    aiInsightsDesc: 'The AI Insights page provides personalized health recommendations based on your data, including medical, nutritional, and fitness suggestions.',
+    consentDesc: 'You must provide consent before the AI can analyze your health data. This ensures your privacy is respected.',
+    goToAiInsights: 'Go to AI Insights',
+    additionalFeatures: 'Additional Features',
+    languageSettings: 'Language Settings',
+    languageDesc: 'Change the application language by clicking on your profile icon in the top-right corner and selecting "Settings".',
+    exportFeature: 'Data Export Options',
+    exportTypes: 'You can export your health data in JSON format for data portability, PDF format for printing, or FHIR format for healthcare system integration.',
+    fhirExport: 'FHIR (Fast Healthcare Interoperability Resources) format allows your data to be shared with healthcare providers and electronic health record systems.',
+    needMoreHelp: 'Need More Help?',
+    contactSupport: 'If you need additional assistance, contact our support team at:',
   },
 };

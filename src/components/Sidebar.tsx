@@ -34,19 +34,23 @@ import {
     },
   }));
   
-  const StyledListItem = styled(ListItem)<{ isActive?: boolean }>(({ theme, isActive }) => ({
+  interface StyledProps {
+    $isActive?: boolean;
+  }
+  
+  const StyledListItem = styled(ListItem)<StyledProps>(({ theme, $isActive }) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     padding: theme.spacing(1, 0),
     marginBottom: theme.spacing(0.5),
-    opacity: isActive ? 1 : 0.85,
+    opacity: $isActive ? 1 : 0.85,
     '&:hover': {
       opacity: 1,
     },
   }));
   
-  const StyledListButton = styled(ListItemButton)<{ isActive?: boolean }>(({ theme, isActive }) => ({
+  const StyledListButton = styled(ListItemButton)<StyledProps>(({ theme, $isActive }) => ({
     borderRadius: '50%',
     minWidth: 50,
     height: 50,
@@ -60,24 +64,24 @@ import {
         backgroundColor: theme.palette.primary.dark,
       },
     },
-    opacity: isActive ? 1 : 0.85,
+    opacity: $isActive ? 1 : 0.85,
     '&:hover': {
       opacity: 1,
     },
   }));
   
-  const IconContainer = styled(ListItemIcon)<{ isActive?: boolean }>(({ theme, isActive }) => ({
+  const IconContainer = styled(ListItemIcon)<StyledProps>(({ theme, $isActive }) => ({
     minWidth: 'auto',
-    color: isActive ? 'inherit' : theme.palette.text.primary,
+    color: $isActive ? 'inherit' : theme.palette.text.primary,
     display: 'flex',
     justifyContent: 'center',
   }));
   
-  const IconLabel = styled(Typography)<{ isActive?: boolean }>(({ theme, isActive }) => ({
+  const IconLabel = styled(Typography)<StyledProps>(({ theme, $isActive }) => ({
     fontSize: '0.7rem',
     textAlign: 'center',
-    color: isActive ? theme.palette.primary.main : theme.palette.text.secondary,
-    fontWeight: isActive ? 600 : 400,
+    color: $isActive ? theme.palette.primary.main : theme.palette.text.secondary,
+    fontWeight: $isActive ? 600 : 400,
     marginTop: theme.spacing(0.5),
     lineHeight: 1.2,
     maxWidth: 70,
@@ -122,18 +126,18 @@ import {
           {navItems.map((item) => {
             const isActive = activePage === item.id;
             return (
-              <StyledListItem key={item.id} disablePadding isActive={isActive}>
+              <StyledListItem key={item.id} disablePadding $isActive={isActive}>
                 <StyledListButton 
                   selected={isActive}
                   onClick={() => onMenuClick(item.id)}
-                  isActive={isActive}
+                  $isActive={isActive}
                   aria-current={isActive ? "page" : undefined}
                 >
-                  <IconContainer isActive={isActive}>
+                  <IconContainer $isActive={isActive}>
                     {item.icon}
                   </IconContainer>
                 </StyledListButton>
-                <IconLabel isActive={isActive}>
+                <IconLabel $isActive={isActive}>
                   {item.label}
                 </IconLabel>
               </StyledListItem>

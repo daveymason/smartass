@@ -69,7 +69,8 @@ const AiInsights: React.FC = () => {
     }
   };
 
-  const medicalRecommendations = [
+  // Use translated recommendations for demo
+  const medicalRecommendations = t('aiInsights.recommendations.medical', { returnObjects: true }) || [
     "Schedule a follow-up appointment in 3 months",
     "Consider additional screening for kidney function",
     "Monitor blood pressure twice weekly",
@@ -77,7 +78,7 @@ const AiInsights: React.FC = () => {
     "Review medication regimen at next visit"
   ];
 
-  const nutritionRecommendations = [
+  const nutritionRecommendations = t('aiInsights.recommendations.nutrition', { returnObjects: true }) || [
     "Increase daily fiber intake to 25-30g",
     "Reduce sodium consumption to under 2000mg per day",
     "Add omega-3 rich foods like fatty fish twice weekly",
@@ -85,7 +86,7 @@ const AiInsights: React.FC = () => {
     "Stay hydrated with at least 2L of water daily"
   ];
 
-  const fitnessRecommendations = [
+  const fitnessRecommendations = t('aiInsights.recommendations.fitness', { returnObjects: true }) || [
     "Aim for 150 minutes of moderate aerobic activity weekly",
     "Incorporate strength training 2-3 times per week",
     "Add flexibility exercises like yoga or stretching",
@@ -235,17 +236,17 @@ const AiInsights: React.FC = () => {
           sx={{ height: '100%' }}
         >
           <List sx={{ p: 0 }}>
-            {medicalRecommendations.map((recommendation, index) => (
+            {medicalRecommendations.map((recommendation: string, index: number) => (
               <RecommendationItem key={index} borderColor="#3a8ffe">
-                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={recommendation}
-                    primaryTypographyProps={{ fontWeight: 500 }}
-                  />
-                </ListItem>
+              <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                <ListItemIcon sx={{ minWidth: 36 }}>
+                <CheckCircleIcon fontSize="small" sx={{ color: '#3a8ffe' }} />
+                </ListItemIcon>
+                <ListItemText
+                primary={recommendation}
+                primaryTypographyProps={{ fontWeight: 500 }}
+                />
+              </ListItem>
               </RecommendationItem>
             ))}
           </List>
@@ -259,17 +260,17 @@ const AiInsights: React.FC = () => {
           sx={{ height: '100%' }}
         >
           <List sx={{ p: 0 }}>
-            {nutritionRecommendations.map((recommendation, index) => (
+            {(nutritionRecommendations as string[]).map((recommendation: string, index: number) => (
               <RecommendationItem key={index} borderColor="#4caf50">
-                <ListItem alignItems="flex-start" sx={{ p: 0 }}>
-                  <ListItemIcon sx={{ minWidth: 36 }}>
-                    <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={recommendation}
-                    primaryTypographyProps={{ fontWeight: 500 }}
-                  />
-                </ListItem>
+              <ListItem alignItems="flex-start" sx={{ p: 0 }}>
+                <ListItemIcon sx={{ minWidth: 36 }}>
+                <CheckCircleIcon fontSize="small" sx={{ color: '#4caf50' }} />
+                </ListItemIcon>
+                <ListItemText
+                primary={recommendation}
+                primaryTypographyProps={{ fontWeight: 500 }}
+                />
+              </ListItem>
               </RecommendationItem>
             ))}
           </List>
@@ -283,7 +284,7 @@ const AiInsights: React.FC = () => {
           sx={{ height: '100%' }}
         >
           <List sx={{ p: 0 }}>
-            {fitnessRecommendations.map((recommendation, index) => (
+            {fitnessRecommendations.map((recommendation: string, index: number) => (
               <RecommendationItem key={index} borderColor="#ff9800">
                 <ListItem alignItems="flex-start" sx={{ p: 0 }}>
                   <ListItemIcon sx={{ minWidth: 36 }}>

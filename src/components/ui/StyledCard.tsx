@@ -14,18 +14,26 @@ const CardContainer = styled(Card)(() => ({
   overflow: 'visible',
 }));
 
+interface StyledCardHeaderProps {
+  bgColor?: string;
+}
+
 const StyledCardHeader = styled(CardHeader, {
   shouldForwardProp: (prop) => prop !== 'bgColor',
-})<{ bgColor?: string }>(({ bgColor }) => ({
+})<StyledCardHeaderProps>(({ bgColor }) => ({
   background: bgColor || 'linear-gradient(135deg, #3a8ffe, #0052cc)',
   paddingLeft: '50px',
   position: 'relative',
   color: 'white',
 }));
 
+interface IconWrapperProps {
+  color?: string;
+}
+
 const IconWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'color',
-})<{ color?: string }>(({ theme, color }) => ({
+})<IconWrapperProps>(({ theme, color }) => ({
   position: 'absolute',
   left: '-10px',
   top: '-10px',
@@ -53,7 +61,6 @@ export interface StyledCardProps extends CardProps {
   children: ReactNode;
   id?: string;
 }
-
 
 const StyledCard: React.FC<StyledCardProps> = ({
   title,
