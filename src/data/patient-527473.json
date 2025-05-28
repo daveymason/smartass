@@ -1,0 +1,41 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 6.8,
+    "Glucose": "Negative",
+    "Protein": "Negative",
+    "Leukocytes": "Negative",
+    "Nitrites": "Negative",
+    "Microalbumin": "8 mg/L",
+    "Creatinine": "135 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Normal",
+    "Blood": "Negative",
+    "Calprotectin": "28 μg/g",
+    "M2PK": "Normal",
+    "FatContent": "1.8%",
+    "Elastase": "420 μg/g",
+    "Parasites": "None detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "72 bpm",
+    "Temperature": "98.6°F",
+    "Weight": "142 lbs",
+    "BodyFat": "19.5%",
+    "Hydration": "Well hydrated",
+    "SitToStand": "10 seconds",
+    "Balance": "Very good"
+  },
+  "aiInsights": {
+    "summary": "Your health assessment reveals consistently strong indicators across all measured parameters. Kidney function is operating at optimal levels with excellent filtration markers. Digestive system shows minimal inflammation and healthy fat processing. Physical fitness markers demonstrate good cardiovascular health and mobility.",
+    "recommendations": [
+      "Continue current hydration strategy - levels are optimal",
+      "Maintain regular exercise routine - heart rate indicates good fitness",
+      "Current diet appears well-balanced based on digestive markers",
+      "Consider adding strength training to complement cardiovascular fitness",
+      "Keep up regular sleep schedule - all recovery markers look good",
+      "Annual health screenings recommended to maintain current status",
+      "Consider gradual increase in physical activity for continued improvement"
+    ]
+  }
+}

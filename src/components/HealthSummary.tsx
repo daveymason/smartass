@@ -72,21 +72,22 @@ function HealthSummary({ patientId }: HealthSummaryProps) {
     exportFHIR();
     handleExportClose();
   };
-
   useEffect(() => {
     const fetchHealthData = async () => {
       try {
-        const isProduction = window.location.hostname !== 'localhost';
-        const baseUrl = isProduction 
-          ? 'https://smarttoilet.jordanesposito.dev' 
-          : '';
+        // Try to load patient-specific data first
+        let response = await fetch(`/data/patient-${patientId}.json`);
         
-        const response = await fetch(`${baseUrl}/api/formatted-observations/${patientId}/`);
         if (!response.ok) {
-          throw new Error('Failed to fetch health data');
+          // Fallback to the original data.json if patient-specific file doesn't exist
+          response = await fetch('/data.json');
+          if (!response.ok) {
+            throw new Error('Failed to fetch health data');
+          }
         }
+        
         const data = await response.json();
-        console.log("Fetched data:", data);
+        console.log("Fetched patient data:", data);
         setHealthData(data);
       } catch (err: any) {
         setError(t('common.error'));

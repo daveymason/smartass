@@ -1,0 +1,41 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 4.8,
+    "Glucose": "Positive (1+)",
+    "Protein": "Positive (2+)",
+    "Leukocytes": "Positive",
+    "Nitrites": "Negative",
+    "Microalbumin": "145 mg/L",
+    "Creatinine": "52 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Hard/Constipated",
+    "Blood": "Trace",
+    "Calprotectin": "285 μg/g",
+    "M2PK": "Elevated",
+    "FatContent": "8.2%",
+    "Elastase": "125 μg/g",
+    "Parasites": "None detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "102 bpm",
+    "Temperature": "99.8°F",
+    "Weight": "145 lbs",
+    "BodyFat": "32.1%",
+    "Hydration": "Mildly dehydrated",
+    "SitToStand": "18 seconds",
+    "Balance": "Fair"
+  },
+  "aiInsights": {
+    "summary": "Your health profile shows multiple indicators requiring medical evaluation. Acidic urine pH combined with glucose presence suggests metabolic concerns. Elevated inflammatory markers in stool analysis indicate digestive system stress. Heart rate elevation and mild fever suggest your body is under physiological stress.",
+    "recommendations": [
+      "Schedule appointment with primary care physician for glucose management",
+      "Increase fiber intake and hydration for digestive health improvement",
+      "Monitor blood sugar levels more frequently",
+      "Consider gastroenterology consultation for inflammatory markers",
+      "Implement stress reduction techniques - elevated heart rate indicates stress",
+      "Gradual increase in physical activity to improve cardiovascular health",
+      "Nutritional counseling for balanced diet and weight management"
+    ]
+  }
+}

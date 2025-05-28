@@ -1,0 +1,39 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 6.2,
+    "Glucose": "Negative",
+    "Protein": "Trace",
+    "Leukocytes": "Negative",
+    "Nitrites": "Negative",
+    "Microalbumin": "15 mg/L",
+    "Creatinine": "120 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Normal",
+    "Blood": "Negative",
+    "Calprotectin": "45 μg/g",
+    "M2PK": "Normal",
+    "FatContent": "2.5%",
+    "Elastase": "350 μg/g",
+    "Parasites": "None detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "72 bpm",
+    "Temperature": "98.6°F",
+    "Weight": "165 lbs",
+    "BodyFat": "18.5%",
+    "Hydration": "Well hydrated",
+    "SitToStand": "12 seconds",
+    "Balance": "Good"
+  },
+  "aiInsights": {
+    "summary": "Based on your recent health data analysis, your overall health profile shows positive indicators across multiple domains. Your urine analysis reveals normal kidney function with appropriate pH levels and minimal protein presence. Cardiovascular markers including heart rate and blood pressure are within healthy ranges. Your hydration levels are optimal, which is excellent for overall metabolic function.",
+    "recommendations": [
+      "Continue maintaining your current hydration levels - aim for 8-10 glasses of water daily",
+      "Your heart rate indicates good cardiovascular fitness - consider maintaining your current activity level",
+      "Body fat percentage is within healthy range - continue balanced nutrition",
+      "Balance test results are good - consider adding stability exercises to maintain mobility as you age",
+      "Regular monitoring of kidney markers is recommended - schedule follow-up testing in 3-6 months"
+    ]
+  }
+}

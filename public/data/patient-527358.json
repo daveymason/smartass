@@ -1,0 +1,41 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 9.2,
+    "Glucose": "Negative",
+    "Protein": "Positive (4+)",
+    "Leukocytes": "Positive",
+    "Nitrites": "Positive",
+    "Microalbumin": "250 mg/L",
+    "Creatinine": "38 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Watery",
+    "Blood": "Positive",
+    "Calprotectin": "580 μg/g",
+    "M2PK": "Highly Elevated",
+    "FatContent": "15.5%",
+    "Elastase": "65 μg/g",
+    "Parasites": "C. difficile detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "115 bpm",
+    "Temperature": "101.8°F",
+    "Weight": "132 lbs",
+    "BodyFat": "15.2%",
+    "Hydration": "Severely dehydrated",
+    "SitToStand": "28 seconds",
+    "Balance": "Very poor"
+  },
+  "aiInsights": {
+    "summary": "CRITICAL: Your health data indicates severe systemic issues requiring immediate emergency medical attention. Extremely high protein levels suggest acute kidney dysfunction, while severe gastrointestinal inflammation with dangerous bacterial infection is present. Dehydration and high fever indicate potential sepsis risk.",
+    "recommendations": [
+      "EMERGENCY: Seek immediate medical attention - multiple critical indicators",
+      "URGENT: Hospital evaluation needed for kidney function and infection",
+      "Immediate IV fluids required for severe dehydration",
+      "Antibiotic treatment needed for C. difficile infection",
+      "Continuous monitoring of vital signs and kidney function",
+      "Strict isolation protocols due to infectious agent",
+      "Family/caregiver should be notified of critical condition"
+    ]
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 6.6,
+    "Glucose": "Negative",
+    "Protein": "Negative",
+    "Leukocytes": "Negative",
+    "Nitrites": "Negative",
+    "Microalbumin": "9 mg/L",
+    "Creatinine": "132 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Normal",
+    "Blood": "Negative",
+    "Calprotectin": "31 μg/g",
+    "M2PK": "Normal",
+    "FatContent": "2.0%",
+    "Elastase": "410 μg/g",
+    "Parasites": "None detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "69 bpm",
+    "Temperature": "98.3°F",
+    "Weight": "158 lbs",
+    "BodyFat": "18.9%",
+    "Hydration": "Well hydrated",
+    "SitToStand": "9 seconds",
+    "Balance": "Excellent"
+  },
+  "aiInsights": {
+    "summary": "Exceptional health profile with all biomarkers indicating optimal physiological function. Your kidney efficiency is outstanding with excellent protein retention and waste filtration. Digestive system demonstrates superior health with minimal inflammation and excellent enzyme activity. Physical conditioning shows excellent cardiovascular fitness and mobility.",
+    "recommendations": [
+      "Outstanding hydration management - continue current excellent practices",
+      "Excellent cardiovascular conditioning - consider challenging fitness goals",
+      "Superior digestive health - maintain current dietary approach",
+      "Exceptional mobility and balance - explore advanced movement activities",
+      "Optimal body composition - current lifestyle approach is exemplary",
+      "Annual comprehensive health assessments to maintain documentation",
+      "Consider fitness leadership roles given your outstanding health metrics"
+    ]
+  }
+}

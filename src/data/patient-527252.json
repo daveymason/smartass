@@ -1,0 +1,41 @@
+{
+  "urineAnalysis": {
+    "pHLevel": 8.5,
+    "Glucose": "Positive (2+)",
+    "Protein": "Positive (3+)",
+    "Leukocytes": "Positive",
+    "Nitrites": "Positive",
+    "Microalbumin": "180 mg/L",
+    "Creatinine": "45 mg/dL"
+  },
+  "stoolAnalysis": {
+    "Consistency": "Loose",
+    "Blood": "Positive",
+    "Calprotectin": "420 μg/g",
+    "M2PK": "Elevated",
+    "FatContent": "12.8%",
+    "Elastase": "85 μg/g",
+    "Parasites": "Giardia detected"
+  },
+  "physicalMarkers": {
+    "HeartRate": "95 bpm",
+    "Temperature": "100.2°F",
+    "Weight": "198 lbs",
+    "BodyFat": "28.5%",
+    "Hydration": "Dehydrated",
+    "SitToStand": "22 seconds",
+    "Balance": "Poor"
+  },
+  "aiInsights": {
+    "summary": "Your recent health analysis indicates several concerning areas that require immediate medical attention. Elevated glucose and protein in urine suggest potential kidney dysfunction and diabetes complications. High calprotectin levels indicate significant intestinal inflammation. Your cardiovascular markers show stress, and dehydration is affecting multiple systems.",
+    "recommendations": [
+      "URGENT: Consult your healthcare provider immediately about elevated glucose and protein levels",
+      "Schedule kidney function tests - creatinine levels are concerning",
+      "Increase fluid intake immediately - severe dehydration detected",
+      "Seek gastrointestinal evaluation for inflammatory markers and parasites",
+      "Monitor blood pressure and heart rate - cardiovascular stress indicators present",
+      "Consider dietary consultation for weight management and diabetic control",
+      "Physical therapy evaluation recommended for balance and mobility issues"
+    ]
+  }
+}
